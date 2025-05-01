@@ -23,7 +23,7 @@ public class CondicionServicio {
   @PostConstruct
   public void init() {
     List<CondicionDataDTO> condicionesData = pacienteService.obtenerCondiciones().getData();
-    this.condiciones = condicionesData.stream().collect(Collectors.toMap(CondicionDataDTO::getCodigo, c -> new Condicion(c.getDescripcion(), c.getPrioritario(), c.getMultiplicador())));
+    this.condiciones = condicionesData.stream().collect(Collectors.toMap(CondicionDataDTO::getCodigo, Condicion::new));
   }
 
   public Condicion getCondicion(Integer codigo) {

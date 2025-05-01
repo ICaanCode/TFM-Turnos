@@ -1,10 +1,11 @@
 package com.unir.turnos.infraestructure.dto.usuario;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Data
 public class UsuarioDataDTO {
 
   private String nombres;
@@ -13,5 +14,8 @@ public class UsuarioDataDTO {
   private String identificacion;
   private Integer rol;
   private String username;
+  private List<ServicioUsuarioDataDTO> servicios;
+  private LocalDateTime fechaCreacion;
+  private LocalDateTime fechaModificacion;
 
 }

@@ -26,7 +26,7 @@ public class ServicioServicio {
   @PostConstruct
   public void init() {
     List<ServicioDataDTO> serviciosData = servicioService.obtenerServicios().getData();
-    this.servicios = serviciosData.stream().collect(Collectors.toMap(ServicioDataDTO::getCodigo, s -> new Servicio(s.getNombre(), s.getDescripcion(), s.getActivo())));
+    this.servicios = serviciosData.stream().collect(Collectors.toMap(ServicioDataDTO::getCodigo, Servicio::new));
   }
 
   public Servicio validarServicio(Integer codigoServicio) {
