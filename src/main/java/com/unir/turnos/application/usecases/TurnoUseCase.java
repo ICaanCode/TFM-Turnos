@@ -93,7 +93,7 @@ public class TurnoUseCase {
     try {
 
       PacienteDTO paciente = pacienteUseCase.obtenerPacienteDTO(turno.getPacienteId().toString());
-      return new TurnoDTO(turno.getCodigo(), paciente, turno.getEstado().getCodigo(), turno.getFechaCreacion(), turno.getFechaFinalizacion());
+      return new TurnoDTO(turno, paciente);
 
     } catch (Exception e) {
 
