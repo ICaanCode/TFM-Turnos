@@ -75,6 +75,11 @@ public class AtencionUseCase {
     return formatearAtencion(atencion);
   }
 
+  public List<AtencionDTO> obtenerAtencionesEnProgreso() {
+    List<AtencionDataDTO> atencionesEnProgreso = servicioCliente.obtenerAtenciones(null, null, false, null, null, null).getData();
+    return atencionesEnProgreso.stream().map(this::formatearAtencion).collect(Collectors.toList());
+  }
+
   private AtencionDTO formatearAtencion(AtencionDataDTO atencion) {
     try {
       UsuarioDTO usuarioDTO = null;

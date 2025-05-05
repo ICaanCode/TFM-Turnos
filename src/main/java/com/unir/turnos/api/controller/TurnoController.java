@@ -45,8 +45,17 @@ public class TurnoController {
 
   @GetMapping("/atenciones")
   public ResponseEntity<Map<String, Object>> obtenerAtencionesEnEspera(@Valid BusquedaAtencionEsperaDTO busquedaAtencionEspera) {
-    List<AtencionDTO> atencionesEnEspera = atencionUseCase.obtenerAtenciones(busquedaAtencionEspera);
-    return ApiResponse.success(atencionesEnEspera, HttpStatus.OK);
+    Boolean usuarioIdNulo = busquedaAtencionEspera.getUsuarioId() == null;
+    Boolean codigoServicioNulo = busquedaAtencionEspera.getCodigoServicio() == null;
+    if (usuarioIdNulo && codigoServicioNulo) {
+      List<AtencionDTO> atencionesEnProgreso = atencionUseCase.obtenerAtencionesEnProgreso();
+      return ApiResponse.success(atencionesEnProgreso, HttpStatus.OK);
+    }
+    if (!usuarioIdNulo && !codigoServicioNulo) {
+      List<AtencionDTO> atencionesEnEspera = atencionUseCase.obtenerAtenciones(busquedaAtencionEspera);
+      return ApiResponse.success(atencionesEnEspera, HttpStatus.OK);
+    }
+    throw new IllegalArgumentException("Debe especificar el codigoServicio y usuarioId.");
   }
 
   @PostMapping
